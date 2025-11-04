@@ -53,14 +53,14 @@ def deutschJozsa(oracle_func, backend):
     # Transpilation pour le backend choisi
     compiled = transpile(qc, backend, optimization_level=3)
 
-    # ✅ Sampler nouvelle API Qiskit Runtime 0.43
+    # Sampler
     sampler = Sampler(mode=backend)
 
     # Lancement du job
     job = sampler.run([compiled], shots=200)
 
     # Suivi d’état (optionnel mais utile)
-    print("⏳ Exécution en cours sur", backend.name)
+    print("Exécution en cours sur", backend.name)
     print("Job ID:", job.job_id())
 
     # Attente du résultat
@@ -75,7 +75,11 @@ def deutschJozsa(oracle_func, backend):
 # ---------------------
 if __name__ == "__main__":
     # Connexion IBM Quantum
-    service = QiskitRuntimeService(channel="ibm_quantum_platform")
+    service = QiskitRuntimeService(
+        channel="ibm_quantum_platform",
+        token="API_TOKEN"
+    )
+    #service = QiskitRuntimeService(channel="ibm_quantum_platform")
 
     # Choix du backend (vrai QPU)
     backend = service.backend("ibm_brisbane")
