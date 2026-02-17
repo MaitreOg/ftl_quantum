@@ -25,6 +25,8 @@ def diffuser(qc, qubits):
 
 
 def search(n, oracle_func):
+    if n < 2:
+        raise ValueError(f"Le nombre de qubits doit être >= 2, reçu : {n}")
     #init
     qc = QuantumCircuit(n, n)
 
